@@ -1,0 +1,28 @@
+<ion-menu [content]="content">
+
+  <!--ion-header>
+    <ion-toolbar>
+      <ion-title>MENU</ion-title>
+    </ion-toolbar>
+  </ion-header-->
+
+  <ion-content style="background-color: #0c4727; padding: 16px;">
+    <div class="menuB">
+      <div class="menuItem" *ngFor="let p of pages" (click)="openPage(p)">
+        <div class="block"></div>
+        <a>
+          {{p.title}}
+        </a>
+      </div>
+      <div class="menuItem" *ngFor="let m of Tags.Registros" (click)="openPageTag(m.UntTxNome, m)">
+        <div class="block"></div>
+        <a>
+          {{m.UntTxNome}}
+        </a>
+      </div>
+    </div>
+  </ion-content>
+
+</ion-menu>
+
+<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>

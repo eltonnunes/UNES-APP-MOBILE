@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-navbar style="background-image: url(assets/menu3.fw.png); background-size: 31px; background-repeat: no-repeat; background-position-y: 6px;">
+    <button menuToggle *ngIf="!selectedItem">
+      <!--ion-icon name="information-circle" style="color: #0c4727;position: absolute; margin-left: -37px; font-size: 40px;"></ion-icon-->
+    </button>
+    <ion-title><img src="assets/logo.jpg" height="25px"></ion-title> <!-- Item Details-->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+ <div *ngIf="selectedItem" class="selection">
+    <b>{{selectedItem.title}}</b>
+    <ion-icon name="{{selectedItem.icon}}"></ion-icon>
+    <div>
+      You navigated here from <b>{{selectedItem.title}}</b>
+    </div>
+  </div>
+</ion-content>

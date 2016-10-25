@@ -1,0 +1,98 @@
+// http://ionicframework.com/docs/v2/theming/
+
+
+// App Global Sass
+// --------------------------------------------------
+// Put style rules here that you want to apply globally. These
+// styles are for the entire app and not just one component.
+// Additionally, this file can be also used as an entry point
+// to import other Sass files to be included in the output CSS.
+//
+// Shared Sass variables, which can be used to adjust Ionic's
+// default Sass variables, belong in "theme/variables.scss".
+//
+// To declare rules for a specific mode, create a child rule
+// for the .md, .ios, or .wp mode classes. The mode class is
+// automatically applied to the <body> element in the app.
+
+.toolbar-background-md {
+    border-color: #b2b2b2;
+    background-color: transparent;
+}
+
+.thumbnail {
+  /*position: relative;*/
+  width: 200px;
+  height: 180px;
+  overflow: hidden;
+}
+.thumbnail img {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  /*height: 100%;*/
+  width: 100%;
+  -webkit-transform: translate(-50%,-50%);
+      -ms-transform: translate(-50%,-50%);
+          transform: translate(-50%,-50%);
+}
+.thumbnail img.portrait {
+  width: 100%;
+  height: auto;
+}
+
+ion-fab[bottom] {
+    bottom: -28px;
+}
+
+[padding], [padding] .scroll-content {
+    padding: 16px 16px 16px 6px;
+}
+
+ion-app{
+   margin-left: 10px;
+}
+
+body{
+   background-color: #0c4727
+}
+
+ion-content{
+   background-color: #0c4727
+}
+
+.toolbar-background-ios {
+    background: none;
+}
+
+ion-header {
+  background-color: #f8f8f8 !important;
+}
+
+a{
+      display: block;
+      margin-left: -34px;
+      /*width: 49%;*/
+}
+
+.menuB{
+  border-left: 2px solid #26A65B;
+  margin-left: 10px;
+  height: 100%;
+  padding-top: 45px;
+}
+
+.menuItem{
+  margin-left: -9px;
+  padding: 16px 16px 16px 0px;
+}
+
+.block{
+  background-color: #26A65B;
+  border: 4px solid #0c4727;
+  border-radius: 1rem;
+  width: 15px;
+  height: 15px;
+  float: left;
+  margin-right: 10px;
+}

@@ -1,0 +1,133 @@
+<ion-header>
+  <ion-navbar style="background-image: url(assets/menu3.fw.png); background-size: 31px; background-repeat: no-repeat; background-position-y: 6px;">
+    <button ion-button menuToggle>
+      <!--ion-icon name="information-circle" style="color: #0c4727;position: absolute; margin-left: -37px; font-size: 40px;"></ion-icon-->
+    </button>
+
+    <ion-title><img src="assets/logo.jpg" height="25px"></ion-title> <!-- Hello Ionic-->
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content padding>
+
+
+    <ion-list no-border-top>
+      <ion-segment [(ngModel)]="tabs">
+        <ion-segment-button value="todos">
+          Todos
+        </ion-segment-button>
+        <ion-segment-button value="maisVistos">
+          + Visto
+        </ion-segment-button>
+        <ion-segment-button value="maisRecentes">
+          + Recente
+        </ion-segment-button>
+      </ion-segment>
+    </ion-list>
+
+    <div [ngSwitch]="tabs">
+
+        <ion-list *ngSwitchCase="'todos'">
+
+          <div *ngFor="let card of Videos.Registros">
+            <ion-card class="adv-map">
+              <div style="position: relative">
+                <div class="sixteen-nine">
+                  <div class="content thumbnail">
+                    <img src="{{protocol}}//i.ytimg.com/vi/{{card.UNV_TX_HASH}}/hqdefault.jpg?custom=true&amp;w=196&amp;h=110&amp;stc=true&amp;jpg444=true&amp;jpgq=90&amp;sp=68&amp;sigh=GYxCech-1w2dDG0BZhqs1t4_Fck">
+                  </div>
+                </div>
+
+                <ion-fab right bottom>
+                  <button ion-fab color="primary" (click)="playVideo($event, card)">
+                    <ion-icon name="play"></ion-icon>
+                  </button>
+                </ion-fab>
+
+              </div>
+              <ion-item style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
+                <ion-badge item-left color="primary" style="clear:bolt">{{card.UNT_TAG.UNT_TX_NOME}}</ion-badge>
+              </ion-item>
+              <ion-item style="padding-top: 0px; ">
+                <h2 class="card-title" style="white-space: initial">
+                  {{card.UNV_TX_TITULO}}
+                </h2>
+              </ion-item>
+
+            </ion-card>
+          </div>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'maisVistos'">
+
+          <div *ngFor="let card of VideosMaisVistos.Registros">
+            <ion-card class="adv-map">
+              <div style="position: relative">
+                <div class="sixteen-nine">
+                  <div class="content thumbnail">
+                    <img src="{{protocol}}//i.ytimg.com/vi/{{card.UNV_TX_HASH}}/hqdefault.jpg?custom=true&amp;w=196&amp;h=110&amp;stc=true&amp;jpg444=true&amp;jpgq=90&amp;sp=68&amp;sigh=GYxCech-1w2dDG0BZhqs1t4_Fck">
+                  </div>
+                </div>
+
+                <ion-fab right bottom>
+                  <button ion-fab color="primary" (click)="playVideo($event, card)">
+                    <ion-icon name="play"></ion-icon>
+                  </button>
+                </ion-fab>
+
+              </div>
+              <ion-item style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
+                <ion-badge item-left color="primary" style="clear:bolt">{{card.UNT_TAG.UNT_TX_NOME}}</ion-badge>
+              </ion-item>
+              <ion-item style="padding-top: 0px; ">
+                <h2 class="card-title" style="white-space: initial">
+                  {{card.UNV_TX_TITULO}}
+                </h2>
+              </ion-item>
+
+            </ion-card>
+          </div>
+        </ion-list>
+
+        <ion-list *ngSwitchCase="'maisRecentes'">
+
+          <div *ngFor="let card of VideosMaisRecentes.Registros">
+            <ion-card class="adv-map">
+              <div style="position: relative">
+                <div class="sixteen-nine">
+                  <div class="content thumbnail">
+                    <img src="{{protocol}}//i.ytimg.com/vi/{{card.UNV_TX_HASH}}/hqdefault.jpg?custom=true&amp;w=196&amp;h=110&amp;stc=true&amp;jpg444=true&amp;jpgq=90&amp;sp=68&amp;sigh=GYxCech-1w2dDG0BZhqs1t4_Fck">
+                  </div>
+                </div>
+
+                <ion-fab right bottom>
+                  <button ion-fab color="primary" (click)="playVideo($event, card)">
+                    <ion-icon name="play"></ion-icon>
+                  </button>
+                </ion-fab>
+
+              </div>
+              <ion-item style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
+                <ion-badge item-left color="primary" style="clear:bolt">{{card.UNT_TAG.UNT_TX_NOME}}</ion-badge>
+              </ion-item>
+              <ion-item style="padding-top: 0px; ">
+                <h2 class="card-title" style="white-space: initial">
+                  {{card.UNV_TX_TITULO}}
+                </h2>
+              </ion-item>
+
+            </ion-card>
+          </div>
+        </ion-list>
+
+    </div>
+
+      <ion-infinite-scroll (ionInfinite)="doInfinite($event)">
+        <ion-infinite-scroll-content
+          loadingSpinner="bubbles"
+          loadingText="Ops! Aguarde...">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
+
+</ion-content>

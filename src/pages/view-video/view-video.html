@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar style="background-image: url(assets/menu3.fw.png); background-size: 31px; background-repeat: no-repeat; background-position-y: 6px;">
+
+    <ion-title><img src="assets/logo.jpg" height="25px"></ion-title>
+    <!-- Item Details-->
+    <button (click)="goBack()" class="goBack">
+      <ion-icon name="close"></ion-icon>
+    </button>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+
+  <ion-card class="adv-map">
+    <div style="position: relative">
+      <div class="sixteen-nine">
+        <iframe frameborder="0" height="200" [src]="url" width="100%" allowfullscreen></iframe>
+      </div>
+
+    </div>
+    <ion-item style="padding-top: 0px;">
+      <ion-badge item-left color="primary" style="clear:bolt">{{selectedItem.UNT_TAG.UNT_TX_NOME}}</ion-badge>
+    </ion-item>
+    <ion-item style="padding-top: 0px; ">
+      <h2 class="card-title" style="white-space: initial">
+        {{selectedItem.UNV_TX_TITULO}}
+      </h2>
+      <p class="card-text" >
+        {{selectedItem.UNV_TX_DESCRICAO}}
+      </p>
+    </ion-item>
+
+  </ion-card>
+
+</ion-content>
