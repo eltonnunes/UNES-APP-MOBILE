@@ -1,16 +1,15 @@
-<ion-header>
-  <ion-navbar style="background-image: url(assets/menu3.fw.png); background-size: 31px; background-repeat: no-repeat; background-position-y: 6px;">
+<ion-header style="margin-left: 10px;">
+  <ion-navbar style="background-image: url(assets/menu3.fw.png); background-size: 40px; background-repeat: no-repeat; background-position: bottom; padding-top: 20px; background-position-x: 0px; ">
     <button ion-button menuToggle>
       <!--ion-icon name="information-circle" style="color: #0c4727;position: absolute; margin-left: -37px; font-size: 40px;"></ion-icon-->
     </button>
 
-    <ion-title><img src="assets/logo.jpg" height="25px"></ion-title> <!-- Hello Ionic-->
+    <ion-title><img src="assets/logo.jpg" height="25px" style="margin-top: 16px;"></ion-title>
   </ion-navbar>
 </ion-header>
 
 
-<ion-content padding>
-
+<ion-content padding  class="home" style="margin-left: 10px;">
 
     <ion-list no-border-top>
       <ion-segment [(ngModel)]="tabs">
@@ -46,10 +45,10 @@
                 </ion-fab>
 
               </div>
-              <ion-item style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
+              <ion-item class="home" style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
                 <ion-badge item-left color="primary" style="clear:bolt">{{card.UNT_TAG.UNT_TX_NOME}}</ion-badge>
               </ion-item>
-              <ion-item style="padding-top: 0px; ">
+              <ion-item class="home" style="padding-top: 0px; ">
                 <h2 class="card-title" style="white-space: initial">
                   {{card.UNV_TX_TITULO}}
                 </h2>
@@ -77,10 +76,10 @@
                 </ion-fab>
 
               </div>
-              <ion-item style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
+              <ion-item class="home" style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
                 <ion-badge item-left color="primary" style="clear:bolt">{{card.UNT_TAG.UNT_TX_NOME}}</ion-badge>
               </ion-item>
-              <ion-item style="padding-top: 0px; ">
+              <ion-item class="home" style="padding-top: 0px; ">
                 <h2 class="card-title" style="white-space: initial">
                   {{card.UNV_TX_TITULO}}
                 </h2>
@@ -108,10 +107,10 @@
                 </ion-fab>
 
               </div>
-              <ion-item style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
+              <ion-item class="home" style="padding-top: 0px;" (click)="itemTapped($event, card.UNT_TAG)">
                 <ion-badge item-left color="primary" style="clear:bolt">{{card.UNT_TAG.UNT_TX_NOME}}</ion-badge>
               </ion-item>
-              <ion-item style="padding-top: 0px; ">
+              <ion-item class="home" style="padding-top: 0px; ">
                 <h2 class="card-title" style="white-space: initial">
                   {{card.UNV_TX_TITULO}}
                 </h2>

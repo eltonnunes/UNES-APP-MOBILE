@@ -10,6 +10,7 @@ import { Login } from '../pages/login/login';
 import { Home } from '../pages/home/home';
 
 import { ApiUnes } from '../providers/api-unes';
+import { LoginService } from '../providers/login-service';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { ApiUnes } from '../providers/api-unes';
     Home
   ],
   providers: [
-    ApiUnes
+    ApiUnes,
+    LoginService
   ]
 })
 export class AppModule {}

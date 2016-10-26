@@ -16,6 +16,7 @@ import { ViewVideo} from '../view-video/view-video';
 })
 export class TagVideo {
 
+  protocol: string = '';
   tabs: string = "tag";
   resultadoConsulta: Boolean = false;
   load: Boolean = false;
@@ -32,11 +33,13 @@ export class TagVideo {
   VideosMaisRecentes: Retorno = new Retorno(Object[0],0,0,0, false);
   VideosTags: Retorno = new Retorno(Object[0],0,0,0, false);
   VideosBusca: Retorno = new Retorno(Object[0],0,0,0, false);
+  dadosLogin: Retorno = new Retorno(Object[0],0,0,0, false);
   param: any;
 
 
   constructor(public loadingCtrl: LoadingController, private apiUnes: ApiUnes, public navCtrl: NavController, public navParams: NavParams) {
-    //console.log(this.navParams);
+    this.dadosLogin = navParams.get('dados');
+    this.protocol = 'https:';
     this.param = this.navParams.get('id');
     this.Titulo = this.param.UntTxNome;
     this.IdTag =  this.param.UntIdTag;
@@ -59,12 +62,13 @@ export class TagVideo {
   playVideo($event, card){
     //console.log(card.UNV_ID_VIDEOS);
     this.navCtrl.push(ViewVideo, {
-      item: card
+      item: card,
+      dados: this.dadosLogin
     });
   }
 
   getTagsMenu(){
-    this.apiUnes.ListaTagsMenu()
+    this.apiUnes.ListaTagsMenu(this.dadosLogin)
                       .subscribe(
                           retorno => {
                             this.resultadoConsulta = false;
@@ -83,7 +87,7 @@ export class TagVideo {
   }
 
   getPerfis(){
-      this.apiUnes.ListaPerfis()
+      this.apiUnes.ListaPerfis(this.dadosLogin)
                         .subscribe(
                             retorno => {
                               //this.resultadoConsulta = false;
@@ -102,7 +106,7 @@ export class TagVideo {
     }
 
   getVideos(pg, tag){
-    this.apiUnes.ListaVideosTags(pg, tag)
+    this.apiUnes.ListaVideosTags(pg, tag, this.dadosLogin)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -127,7 +131,7 @@ export class TagVideo {
   }
 
   getVideosMaisVistos(pg){
-    this.apiUnes.ListaVideosMaisVistos(pg)
+    this.apiUnes.ListaVideosMaisVistos(pg, this.dadosLogin)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -152,7 +156,7 @@ export class TagVideo {
   }
 
   getVideosMaisRecentes(pg){
-    this.apiUnes.ListaVideosMaisRecentes(pg)
+    this.apiUnes.ListaVideosMaisRecentes(pg, this.dadosLogin)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -177,7 +181,7 @@ export class TagVideo {
   }
 
   getVideosTags(pg, querystring){
-    this.apiUnes.ListaVideosTags(pg, querystring)
+    this.apiUnes.ListaVideosTags(pg, querystring, this.dadosLogin)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -204,7 +208,7 @@ export class TagVideo {
   }
 
   getPesquisa(pg, querystring){
-    this.apiUnes.ListaBuscaVideos(pg, querystring)
+    this.apiUnes.ListaBuscaVideos(pg, querystring, this.dadosLogin)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -244,7 +248,7 @@ export class TagVideo {
           {
             this.pgTodos++;
             let pg: number = this.pgTodos;
-            this.apiUnes.ListaVideosTags(pg, this.IdTag)
+            this.apiUnes.ListaVideosTags(pg, this.IdTag, this.dadosLogin)
                               .subscribe(
                                   retorno => {
                                     if(this.Videos.Registros != null){

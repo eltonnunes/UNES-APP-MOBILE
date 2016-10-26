@@ -11,6 +11,7 @@ import { ListPage } from '../pages/list/list';
 import { ViewVideo } from '../pages/view-video/view-video';
 import { TagVideo } from '../pages/tag-video/tag-video';
 import { Login } from '../pages/login/login';
+import { Home } from '../pages/home/home';
 
 import { LoadingController } from 'ionic-angular';
 import { ApiUnes } from '../providers/api-unes';
@@ -24,7 +25,7 @@ export class MyApp {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage: any = HelloIonicPage;
+  rootPage: any = Login;
   pages: Array<{title: string, component: any}>;
   Tags: Retorno = new Retorno(Object[0],0,0,0, false);
 
@@ -47,19 +48,16 @@ export class MyApp {
   }
 
   getTagsMenu(){
-    this.apiUnes.ListaTagsMenu()
+    /*this.apiUnes.ListaTagsMenu()
                       .subscribe(
                           retorno => {
                             this.Tags = retorno;
 
-                            /*for (let i = 0; i < retorno.Registros.length; i++) {
-                                this.pages.push(  { title: retorno.Registros[i].UntTxNome, component: TagVideo } );
-                            }*/
 
                           },
                           err => {
                               console.log(err);
-                          });
+                          });*/
   }
 
   initializeApp() {

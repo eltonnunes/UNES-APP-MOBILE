@@ -3,6 +3,8 @@ import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 
 import { ItemDetailsPage } from '../item-details/item-details';
+import { Retorno } from '../../models/retorno';
+import { HelloIonicPage } from '../hello-ionic/hello-ionic';
 
 
 @Component({
@@ -12,8 +14,16 @@ export class ListPage {
   selectedItem: any;
   icons: string[];
   items: Array<{title: string, note: string, icon: string}>;
+  dadosLogin: Retorno = new Retorno(Object[0],0,0,0, false);
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
+    this.dadosLogin = navParams.data;//navParams.get('dados');
+    //console.log(navParams.data);
+    //console.log(this.dadosLogin);
+    this.navCtrl.push(HelloIonicPage, {
+      dados: this.dadosLogin
+    });
+
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');
 

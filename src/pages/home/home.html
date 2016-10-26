@@ -20,9 +20,15 @@
           {{m.UntTxNome}}
         </a>
       </div>
+      <div class="menuItem" (click)="sair()">
+        <div class="block"></div>
+        <a>
+          Sair
+        </a>
+      </div>
     </div>
   </ion-content>
 
 </ion-menu>
 
-<ion-nav [root]="rootPage" #content swipeBackEnabled="false"></ion-nav>
+<ion-nav [root]="rootPage" [rootParams]="rootPageParams" #content swipeBackEnabled="false"></ion-nav>

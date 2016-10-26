@@ -24,38 +24,39 @@ export class Home {
   @ViewChild(Nav) nav: Nav;
 
   // make HelloIonicPage the root (or first) page
-  rootPage: any = HelloIonicPage;
+  rootPage: any= HelloIonicPage;
+  rootPageParams: Retorno = new Retorno(Object[0],0,0,0, false);
+
   pages: Array<{title: string, component: any}>;
   Tags: Retorno = new Retorno(Object[0],0,0,0, false);
+  dadosLogin: Retorno = new Retorno(Object[0],0,0,0, false);
 
   constructor(
     public loadingCtrl: LoadingController,
     public platform: Platform,
     public menu: MenuController,
-    public apiUnes: ApiUnes
-    //public navCtrl: NavController,
-    //public navParams: NavParams
+    public apiUnes: ApiUnes,
+    public navCtrl: NavController,
+    public navParams: NavParams
   ) {
-    this.initializeApp();
 
+    this.dadosLogin = navParams.get('dados');
     // set our app's pages
     this.pages = [
       { title: 'Home', component: HelloIonicPage }//,
-      /*{ title: 'My First List', component: ListPage },
-      { title: 'View Video', component: ViewVideo }*/
     ];
   }
 
+  ionViewCanEnter(){
+    this.rootPageParams = this.navParams.get('dados');
+    this.initializeApp();
+  }
+
   getTagsMenu(){
-    this.apiUnes.ListaTagsMenu()
+    this.apiUnes.ListaTagsMenu(this.dadosLogin)
                       .subscribe(
                           retorno => {
                             this.Tags = retorno;
-
-                            /*for (let i = 0; i < retorno.Registros.length; i++) {
-                                this.pages.push(  { title: retorno.Registros[i].UntTxNome, component: TagVideo } );
-                            }*/
-
                           },
                           err => {
                               console.log(err);
@@ -85,7 +86,7 @@ export class Home {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(page.component, { id: tag});
+    this.nav.setRoot(page.component, { id: tag, dados: this.dadosLogin});
   }
 
   openPageTag(Titulo, tag) {
@@ -93,7 +94,11 @@ export class Home {
     // close the menu when clicking a link from the menu
     this.menu.close();
     // navigate to the new page if it is not the current page
-    this.nav.setRoot(TagVideo, { id: tag });
+    this.nav.setRoot(TagVideo, { id: tag, dados: this.dadosLogin });
+  }
+
+  sair(){
+    this.navCtrl.push(Login, { dados: '' });
   }
 
 }
