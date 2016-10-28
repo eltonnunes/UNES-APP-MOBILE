@@ -34,19 +34,45 @@ ion-menu{
 }
 */
 
+.toolbar-title-md {
+    text-align: center !important;
+}
+
+.toolbar-title-wp {
+    text-align: center !important;
+}
+
+
+input{
+  border-bottom: 1px solid #dedede !important;
+}
+
+.list-md > .item-block:last-child, .list-md > .item-wrapper:last-child .item-block {
+    border-bottom: none !important;
+}
+.list-md > .item-block:first-child, .list-md > .item-wrapper:first-child .item-block {
+    border-top: none !important;
+}
+
 .list-ios > .item-block:last-child .item-inner, .list-ios > .item-wrapper:last-child .item-block .item-inner {
-    border-bottom: 0;
+    border-bottom: 0 !important;
     border-bottom: 0.55px solid #c8c7cc;
 }
 
 
 .list-ios > .item-block .item-inner, .list-ios > .item-wrapper .item-block .item-inner {
-    border-bottom: 0;
+    border-bottom: 0 !important;
     border-bottom: 0.55px solid #c8c7cc !important;
 }
 
 .list-ios > .item-block:last-child, .list-ios > .item-wrapper:last-child .item-block {
     border-bottom: none;
+    border-bottom: 0 !important;
+}
+
+.list-ios > .item-block .item-inner{
+  border-bottom: none;
+  border-bottom: 0 !important;
 }
 
 .list-ios > .item-block:first-child {

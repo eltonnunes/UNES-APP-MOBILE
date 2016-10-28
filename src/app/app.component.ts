@@ -1,7 +1,7 @@
 import { Component, ViewChild } from '@angular/core';
 
 import { NavController, NavParams } from 'ionic-angular';
-
+import { NativeStorage } from 'ionic-native';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 
 import { StatusBar } from 'ionic-native';
@@ -15,6 +15,7 @@ import { Home } from '../pages/home/home';
 
 import { LoadingController } from 'ionic-angular';
 import { ApiUnes } from '../providers/api-unes';
+import { LoginService } from '../providers/login-service';
 import { Retorno } from '../models/retorno';
 
 @Component({
@@ -33,11 +34,25 @@ export class MyApp {
     public loadingCtrl: LoadingController,
     public platform: Platform,
     public menu: MenuController,
-    public apiUnes: ApiUnes
-    //public navCtrl: NavController,
-    //public navParams: NavParams
+    public apiUnes: ApiUnes,
+    public loginService: LoginService/*,
+    public navCtrl: NavController,
+    public navParams: NavParams*/
   ) {
     this.initializeApp();
+
+    let token: string = window.localStorage.getItem('auth_token');
+    if( token != undefined && token != '' ){
+    this.loginService.getValidateToken()
+                                        .subscribe(
+                                            retorno => {
+                                              this.nav.setRoot(Home, { dados: retorno });
+                                              //console.log(retorno);
+                                            },
+                                            err => {
+                                                //console.log(err);
+                                            });
+    }
 
     // set our app's pages
     this.pages = [
@@ -47,25 +62,14 @@ export class MyApp {
     ];
   }
 
-  getTagsMenu(){
-    /*this.apiUnes.ListaTagsMenu()
-                      .subscribe(
-                          retorno => {
-                            this.Tags = retorno;
-
-
-                          },
-                          err => {
-                              console.log(err);
-                          });*/
-  }
 
   initializeApp() {
-    this.getTagsMenu();
     this.platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+      StatusBar.overlaysWebView(true); // let status bar overlay webview
+      StatusBar.backgroundColorByHexString('#ffffff'); // set status bar to white
     });
   }
 

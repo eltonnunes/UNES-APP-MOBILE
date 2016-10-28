@@ -24,7 +24,11 @@ import { LoginService } from '../providers/login-service';
     Home
   ],
   imports: [
-    IonicModule.forRoot(MyApp)
+    IonicModule.forRoot(MyApp,{
+      mode: 'ios',
+      iconMode: 'ios',
+      pageTransition: 'ios'
+    })
   ],
   bootstrap: [IonicApp],
   entryComponents: [

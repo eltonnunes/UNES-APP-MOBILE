@@ -21,6 +21,20 @@ page-home {
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
 
+.toolbar-title-ios {
+    font-size: 1.7rem;
+    font-weight: 600;
+    text-align: center;
+    color: #000;
+    pointer-events: auto;
+    /*height: 100% !important;*/
+    margin-top: 16px;
+}
+
+.toolbar-ios ion-title {
+
+}
+
 .toolbar-background-md {
     border-color: #b2b2b2;
     background-color: transparent;
@@ -88,7 +102,7 @@ a{
 .menuB{
   border-left: 2px solid #26A65B;
   margin-left: 10px;
-  height: 100%;
+  /*height: 100%;*/
   padding-top: 45px;
 }
 

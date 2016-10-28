@@ -13,6 +13,7 @@ import { Login } from '../login/login';
 
 
 import { ApiUnes } from '../../providers/api-unes';
+import { LoginService } from '../../providers/login-service';
 import { Retorno } from '../../models/retorno';
 
 @Component({
@@ -37,10 +38,15 @@ export class Home {
     public menu: MenuController,
     public apiUnes: ApiUnes,
     public navCtrl: NavController,
-    public navParams: NavParams
+    public navParams: NavParams,
+    public loginService: LoginService
   ) {
 
     this.dadosLogin = navParams.get('dados');
+    //this.dadosLogin = navParams.data;
+    if(navParams.data == undefined){
+      this.getDadosAcesso();
+    }
     // set our app's pages
     this.pages = [
       { title: 'Home', component: HelloIonicPage }//,
@@ -52,8 +58,26 @@ export class Home {
     this.initializeApp();
   }
 
+  getDadosAcesso(){
+
+    if( this.dadosLogin.Registros == undefined ){
+      let token: string = window.localStorage.getItem('auth_token');
+      if( token != undefined && token != '' ){
+      this.loginService.getValidateToken()
+                                          .subscribe(
+                                              retorno => {
+                                                this.dadosLogin = retorno;
+                                              },
+                                              err => {
+                                                  //console.log(err);
+                                              });
+      }
+    }
+
+  }
+
   getTagsMenu(){
-    this.apiUnes.ListaTagsMenu(this.dadosLogin)
+    this.apiUnes.ListaTagsMenu()
                       .subscribe(
                           retorno => {
                             this.Tags = retorno;

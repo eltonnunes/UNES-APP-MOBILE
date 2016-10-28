@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar style="height: 135px; background-color: #fff;">
-    <ion-title><img src="assets/logoLogin.jpg" height="100px" style="margin-top: 15px; vertical-align: bottom;"></ion-title>
+    <ion-title><img src="assets/logoLogin.jpg" height="100px" style="vertical-align: bottom;"></ion-title>
   </ion-navbar>
 </ion-header>
 
@@ -23,14 +23,14 @@
 
     <ion-item style="margin: 8px;">
       <ion-label floating>Password</ion-label>
-      <ion-input [(ngModel)]="password"  type="password" value=""></ion-input>
+      <ion-input [(ngModel)]="password" type="number" style="-webkit-text-security:disc" value=""></ion-input>
     </ion-item>
 
   </ion-list>
 
   <div padding>
-    <button style="background-color: #0c4727 !important" class="disable-hover button button-ios button-default button-default-ios button-block button-block-ios"
-    (click)="Autenticar()">Logar</button>
+    <button style="background-color: #0c4727 !important;" class="disable-hover button button-ios button-default button-default-ios button-block button-block-ios"
+    (click)="Autenticar()" (press)="Autenticar()">Logar</button>
   </div>
 
 

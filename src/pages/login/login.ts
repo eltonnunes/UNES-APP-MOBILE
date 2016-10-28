@@ -6,6 +6,7 @@ import { AlertController } from 'ionic-angular';
 
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { HelloIonicPage } from '../hello-ionic/hello-ionic';
+import { ListPage } from '../list/list';
 import { Home } from '../home/home';
 
 import { ApiUnes } from '../../providers/api-unes';
@@ -31,6 +32,8 @@ export class Login {
   login                 : Boolean = true;
   loggedIn              : Boolean = false;
   errorLogin            : Boolean = false;
+  token: string = '##';
+
   constructor(
     public loadingCtrl: LoadingController,
     public platform: Platform,
@@ -46,6 +49,13 @@ export class Login {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
       StatusBar.styleDefault();
+
+      /*this.token = <string> window.localStorage.getItem('auth_token');
+      if( this.token != undefined && this.token != '' )
+      {
+        this.navCtrl.push(ListPage);
+      }*/
+
     });
 
     // set our app's pages
@@ -78,71 +88,72 @@ export class Login {
   }
 
   Autenticar(){
-    this.login = false;
-    this.loginService.Autenticar({ 'usuario' : this.username, 'senha' : this.password })
-                      .subscribe(
-                          retorno => {
 
-                            if(this.username.length != 0 && this.password.length != 0)
-                            {
-                              if( retorno.Registros != null)
+    if(this.login)
+    {
+      this.login = false;
+      this.loginService.Autenticar({ 'usuario' : this.username, 'senha' : this.password })
+                        .subscribe(
+                            retorno => {
+
+                              if(this.username.length != 0 && this.password.length != 0)
                               {
-                                this.retorno = retorno;
-                                if(this.retorno.Registros[0] != false)
+                                if( retorno.Registros != null)
                                 {
-                                  let dadosUser : Usuarioalias = <Usuarioalias> this.retorno.Registros[0];
+                                  this.retorno = retorno;
+                                  if(this.retorno.Registros[0] != false)
+                                  {
 
-                                  /*NativeStorage.setItem('auth_token', {property: this.retorno.Registros[0].UTA_TX_TOKEN, anotherProperty: undefined}).then(() => console.log('Stored item!'), error => console.error('Error storing item', error) );
-                                  NativeStorage.setItem('auth_validate', {property: this.retorno.Registros[0].UTA_DT_VALIDADE, anotherProperty: undefined}).then(() => console.log('Stored item!'), error => console.error('Error storing item', error) );
-                                  NativeStorage.setItem('nome', {property: this.retorno.Registros[0].PES_PESSOA.PES_TX_NOME, anotherProperty: undefined}).then(() => console.log('Stored item!'), error => console.error('Error storing item', error) );
-                                  NativeStorage.setItem('email', {property: this.retorno.Registros[0].PES_PESSOA.PES_TX_EMAIL, anotherProperty: undefined}).then(() => console.log('Stored item!'), error => console.error('Error storing item', error) );
-                                  */
+                                    let dadosUser : Usuarioalias = <Usuarioalias> this.retorno.Registros[0];
+                                    window.localStorage.setItem('auth_token', this.retorno.Registros[0].UTA_TX_TOKEN);
 
-                                  this.login = true;
-                                  this.loggedIn = true;
-                                  this.loginSemAcesso = false;
+                                    this.login = true;
+                                    this.loggedIn = true;
+                                    this.loginSemAcesso = false;
 
-                                  // Redirect
-                                  this.navCtrl.push(Home, { dados: this.retorno });
+                                    // Redirect
+                                    this.navCtrl.push(Home, { dados: this.retorno });
 
-                                }else{
+                                  }else{
+                                    this.login = true;
+                                    this.errorLogin  = true;
+                                    this.loginSemAcesso = true;
+                                    this.showAlert('Erro','Ops! Usuário ou Password inválido.');
+                                  }
+                                }
+                                else{
                                   this.login = true;
                                   this.errorLogin  = true;
-                                  this.loginSemAcesso = true;
+                                  this.loginSemAcesso = false;
                                   this.showAlert('Erro','Ops! Não foi possível efetuar login.');
                                 }
-                              }
-                              else{
+                              }else{
                                 this.login = true;
-                                this.errorLogin  = true;
-                                this.loginSemAcesso = false;
-                                this.showAlert('Erro','Ops! Não foi possível efetuar login.');
+                                if(this.username.length == 0 && this.password.length == 0)
+                                {
+                                  this.showAlert('Erro','Ops! Por favor preencha os dados de acesso.');
+                                }else if(this.username.length == 0){
+                                  this.showAlert('Erro','Ops! Por favor preencha o Usuário.');
+                                }else if(this.password.length == 0){
+                                  this.showAlert('Erro','Ops! Por favor preencha o Password.');
+                                }
+
+
+
                               }
-                            }else{
-                              if(this.username.length == 0 && this.password.length == 0)
-                              {
-                                this.showAlert('Erro','Ops! Porfavor preencha os dados de acesso.');
-                              }else if(this.username.length == 0){
-                                this.showAlert('Erro','Ops! Porfavor preencha o Usuário.');
-                              }else if(this.password.length == 0){
-                                this.showAlert('Erro','Ops! Porfavor preencha o Password.');
-                              }
+
+                            },
+                            err => {
+                              this.login = true;
+                              this.showAlert('Erro','Ops! Erro ao efetuar login.');
+                               this.login = true;
+                               this.errorLogin  = true;
+                               this.loginSemAcesso = false;
+                                console.log(err);
+                            });
 
 
-
-                            }
-
-                          },
-                          err => {
-                            this.showAlert('Erro','Ops! Erro ao efetuar login.');
-                             this.login = true;
-                             this.errorLogin  = true;
-                             this.loginSemAcesso = false;
-                              console.log(err);
-                          });
-
-
-
+      }
 
   }
 

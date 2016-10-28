@@ -21,58 +21,57 @@ export class ApiUnes {
   constructor(private http: Http) { }
 
 
-  public ListaTagsMenu(dados){
-    // console.log(dados)
-    let urlapi: string =  this.API_URL_TAGS + dados.Registros[0].UTA_TX_TOKEN
+  public ListaTagsMenu(){
+    let urlapi: string =  this.API_URL_TAGS + window.localStorage.getItem('auth_token')
+                                              + '/1/100/0/0/1'; //Valores fixos para /Coleção/CampoOrdenação/Ordenação/ItensPorPagina/PaginaAtual
+    return this.http.get(urlapi)
+                    .map((res:Response) => res.json())
+                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  public ListaPerfis(){
+    let urlapi: string =  this.API_URL_PERFIS + window.localStorage.getItem('auth_token')
                                             + '/1/100/0/0/1'; //Valores fixos para /Coleção/CampoOrdenação/Ordenação/ItensPorPagina/PaginaAtual
     return this.http.get(urlapi)
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public ListaPerfis(dados){
-    let urlapi: string =  this.API_URL_PERFIS + dados.Registros[0].UTA_TX_TOKEN
-                                            + '/1/100/0/0/1'; //Valores fixos para /Coleção/CampoOrdenação/Ordenação/ItensPorPagina/PaginaAtual
-    return this.http.get(urlapi)
-                    .map((res:Response) => res.json())
-                    .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
-  }
-
-  public ListaVideos(pg, dados){
-    let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN
+  public ListaVideos(pg){
+    let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token')
                                               + '/1/100/1/6/' + pg;
     return this.http.get(urlapi)
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public ListaVideosMaisVistos(pg, dados){
-    let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN
+  public ListaVideosMaisVistos(pg){
+    let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token')
                                               + '/0/103/1/6/' + pg;
     return this.http.get(urlapi)
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public ListaVideosMaisRecentes(pg, dados){
-    let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN
+  public ListaVideosMaisRecentes(pg){
+    let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token')
                                               + '/1/105/1/6/' + pg;
     return this.http.get(urlapi)
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public ListaVideosTags(pg, querystring, dados){
-    let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN
+  public ListaVideosTags(pg, querystring){
+    let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token')
                                               + '/0/105/1/6/' + pg + '/?106=' + querystring;
     return this.http.get(urlapi)
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public ListaBuscaVideos(pg, search, dados){
+  public ListaBuscaVideos(pg, search){
     let queryString = '?102=' + search + '%&101=' + search + '%';
-    let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN
+    let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token')
                                               + '/0/105/1/6/' + pg + '/' + queryString;
     return this.http.get(urlapi)
                     .map((res:Response) => res.json())
@@ -80,17 +79,17 @@ export class ApiUnes {
   }
 
 
-  public ListaAdmin(dados){
+  public ListaAdmin(){
     let URL:string  = GlobalVariable.BASE_API_URL + 'TbUniversidadeTokenApi/';
-    let urlapi: string =  URL + dados.Registros[0].UTA_TX_TOKEN
+    let urlapi: string =  URL + window.localStorage.getItem('auth_token')
                                               + '/3/100/0/0/1';
     return this.http.get(urlapi)
                     .map((res:Response) => res.json())
                     .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public AtualizaViewVideo(body: any, dados): Observable<Response> {
-        let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN;
+  public AtualizaViewVideo(body: any): Observable<Response> {
+        let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token');
         let bodyString = JSON.stringify(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -99,8 +98,8 @@ export class ApiUnes {
                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
 
-  public AtualizaVideo(body: any, dados): Observable<Response> {
-        let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN + '/alterar';
+  public AtualizaVideo(body: any): Observable<Response> {
+        let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token') + '/alterar';
         let bodyString = JSON.stringify(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
@@ -110,8 +109,8 @@ export class ApiUnes {
   }
 
 
-  public RemoverVideo(id: any, dados): Observable<Response> {
-        let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN + '/' + id;
+  public RemoverVideo(id: any): Observable<Response> {
+        let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token') + '/' + id;
         return this.http.delete(urlapi)
                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -126,8 +125,8 @@ export class ApiUnes {
 
 
 
-  public CadastrarVideo(body: any, dados): Observable<number> {
-    let urlapi: string =  this.API_URL_VIDEOS + dados.Registros[0].UTA_TX_TOKEN;
+  public CadastrarVideo(body: any): Observable<number> {
+    let urlapi: string =  this.API_URL_VIDEOS + window.localStorage.getItem('auth_token');
     let bodyString = JSON.stringify(body);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });

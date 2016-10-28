@@ -68,7 +68,7 @@ export class TagVideo {
   }
 
   getTagsMenu(){
-    this.apiUnes.ListaTagsMenu(this.dadosLogin)
+    this.apiUnes.ListaTagsMenu()
                       .subscribe(
                           retorno => {
                             this.resultadoConsulta = false;
@@ -87,7 +87,7 @@ export class TagVideo {
   }
 
   getPerfis(){
-      this.apiUnes.ListaPerfis(this.dadosLogin)
+      this.apiUnes.ListaPerfis()
                         .subscribe(
                             retorno => {
                               //this.resultadoConsulta = false;
@@ -106,7 +106,7 @@ export class TagVideo {
     }
 
   getVideos(pg, tag){
-    this.apiUnes.ListaVideosTags(pg, tag, this.dadosLogin)
+    this.apiUnes.ListaVideosTags(pg, tag)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -131,7 +131,7 @@ export class TagVideo {
   }
 
   getVideosMaisVistos(pg){
-    this.apiUnes.ListaVideosMaisVistos(pg, this.dadosLogin)
+    this.apiUnes.ListaVideosMaisVistos(pg)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -156,7 +156,7 @@ export class TagVideo {
   }
 
   getVideosMaisRecentes(pg){
-    this.apiUnes.ListaVideosMaisRecentes(pg, this.dadosLogin)
+    this.apiUnes.ListaVideosMaisRecentes(pg)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -181,7 +181,7 @@ export class TagVideo {
   }
 
   getVideosTags(pg, querystring){
-    this.apiUnes.ListaVideosTags(pg, querystring, this.dadosLogin)
+    this.apiUnes.ListaVideosTags(pg, querystring)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -208,7 +208,7 @@ export class TagVideo {
   }
 
   getPesquisa(pg, querystring){
-    this.apiUnes.ListaBuscaVideos(pg, querystring, this.dadosLogin)
+    this.apiUnes.ListaBuscaVideos(pg, querystring)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -248,7 +248,7 @@ export class TagVideo {
           {
             this.pgTodos++;
             let pg: number = this.pgTodos;
-            this.apiUnes.ListaVideosTags(pg, this.IdTag, this.dadosLogin)
+            this.apiUnes.ListaVideosTags(pg, this.IdTag)
                               .subscribe(
                                   retorno => {
                                     if(this.Videos.Registros != null){

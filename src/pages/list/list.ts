@@ -17,12 +17,7 @@ export class ListPage {
   dadosLogin: Retorno = new Retorno(Object[0],0,0,0, false);
 
   constructor(public navCtrl: NavController, public navParams: NavParams) {
-    this.dadosLogin = navParams.data;//navParams.get('dados');
-    //console.log(navParams.data);
-    //console.log(this.dadosLogin);
-    this.navCtrl.push(HelloIonicPage, {
-      dados: this.dadosLogin
-    });
+    this.navCtrl.push(HelloIonicPage);
 
     // If we navigated to this page, we will have an item available as a nav param
     this.selectedItem = navParams.get('item');

@@ -46,7 +46,7 @@ export class LoginService {
 
       // Valida se o Token Informado é válido
       public getValidateToken() : Observable<Retorno>{
-        this.TOKEN = NativeStorage.getItem('auth_token').then( data => console.log(data), error => console.error(error));
+        this.TOKEN = window.localStorage.getItem('auth_token');//NativeStorage.getItem('auth_token').then( data => console.log(data), error => console.error(error));
         let urlapi: string =  GlobalVariable.BASE_API_URL + 'TbUniversidadeTokenApi/'
                                                           + this.TOKEN
                                                           + '/2/100/0/0/1';

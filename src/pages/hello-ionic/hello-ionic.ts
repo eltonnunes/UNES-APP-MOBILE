@@ -3,11 +3,12 @@ import { NavController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
 
 import { ApiUnes } from '../../providers/api-unes';
-
+import { LoginService } from '../../providers/login-service';
 import { Retorno } from '../../models/retorno';
 
 import { ViewVideo } from '../view-video/view-video';
 import { TagVideo } from '../tag-video/tag-video';
+import { Home } from '../home/home';
 
 
 @Component({
@@ -34,17 +35,23 @@ export class HelloIonicPage {
   dadosLogin: Retorno = new Retorno(Object[0],0,0,0, false);
 
 
-  constructor(public loadingCtrl: LoadingController, private apiUnes: ApiUnes, public navCtrl: NavController, public navParams: NavParams) {
-    console.log(navParams.data);
-    
-    this.dadosLogin = navParams.data;
-    this.protocol = 'https:';//window.location.protocol;
-    this.presentLoading();
-    this.getTagsMenu();
-    this.getPerfis();
-    this.getVideos(this.pgTodos);
-    this.getVideosMaisVistos(this.pgMaisVistos);
-    this.getVideosMaisRecentes(this.pgMaisRecentes);
+  constructor(
+              public loadingCtrl: LoadingController,
+              private apiUnes: ApiUnes,
+              public navCtrl: NavController,
+              public navParams: NavParams,
+              public loginService: LoginService) {
+
+      this.protocol = 'https:';
+      this.presentLoading();
+      this.getTagsMenu();
+      this.getPerfis();
+      this.getVideos(this.pgTodos);
+      this.getVideosMaisVistos(this.pgMaisVistos);
+      this.getVideosMaisRecentes(this.pgMaisRecentes);
+
+
+
 
   }
 
@@ -59,14 +66,12 @@ export class HelloIonicPage {
 
   playVideo($event, card){
     console.log(card.UNV_ID_VIDEOS);
-    this.navCtrl.push(ViewVideo, {
-      item: card,
-      dados: this.dadosLogin
-    });
+    this.navCtrl.push(ViewVideo, { item: card });
   }
 
+
   getTagsMenu(){
-    this.apiUnes.ListaTagsMenu(this.dadosLogin)
+    this.apiUnes.ListaTagsMenu()
                       .subscribe(
                           retorno => {
                             this.resultadoConsulta = false;
@@ -85,7 +90,8 @@ export class HelloIonicPage {
   }
 
   getPerfis(){
-      this.apiUnes.ListaPerfis(this.dadosLogin)
+
+      this.apiUnes.ListaPerfis()
                         .subscribe(
                             retorno => {
                               //this.resultadoConsulta = false;
@@ -104,7 +110,7 @@ export class HelloIonicPage {
     }
 
   getVideos(pg){
-    this.apiUnes.ListaVideos(pg, this.dadosLogin)
+    this.apiUnes.ListaVideos(pg)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -129,7 +135,7 @@ export class HelloIonicPage {
   }
 
   getVideosMaisVistos(pg){
-    this.apiUnes.ListaVideosMaisVistos(pg, this.dadosLogin)
+    this.apiUnes.ListaVideosMaisVistos(pg)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -154,7 +160,7 @@ export class HelloIonicPage {
   }
 
   getVideosMaisRecentes(pg){
-    this.apiUnes.ListaVideosMaisRecentes(pg, this.dadosLogin)
+    this.apiUnes.ListaVideosMaisRecentes(pg)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -179,7 +185,7 @@ export class HelloIonicPage {
   }
 
   getVideosTags(pg, querystring){
-    this.apiUnes.ListaVideosTags(pg, querystring, this.dadosLogin)
+    this.apiUnes.ListaVideosTags(pg, querystring)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -206,7 +212,7 @@ export class HelloIonicPage {
   }
 
   getPesquisa(pg, querystring){
-    this.apiUnes.ListaBuscaVideos(pg, querystring, this.dadosLogin)
+    this.apiUnes.ListaBuscaVideos(pg, querystring)
                       .subscribe(
                           retorno => {
                             //this.loginService.Validate(retorno.Token);
@@ -246,7 +252,7 @@ export class HelloIonicPage {
         {
           this.pgTodos++;
           let pg: number = this.pgTodos;
-          this.apiUnes.ListaVideos(pg, this.dadosLogin)
+          this.apiUnes.ListaVideos(pg)
                             .subscribe(
                                 retorno => {
                                   if(this.Videos.Registros != null){
@@ -274,7 +280,7 @@ export class HelloIonicPage {
         {
           this.pgTodos++;
             let pg: number = this.pgTodos;
-            this.apiUnes.ListaVideosMaisVistos(pg, this.dadosLogin)
+            this.apiUnes.ListaVideosMaisVistos(pg)
                               .subscribe(
                                   retorno => {
                                     if(this.VideosMaisVistos.Registros != null){
@@ -303,7 +309,7 @@ export class HelloIonicPage {
         {
           this.pgTodos++;
           let pg: number = this.pgTodos;
-          this.apiUnes.ListaVideosMaisRecentes(pg, this.dadosLogin)
+          this.apiUnes.ListaVideosMaisRecentes(pg)
                             .subscribe(
                                 retorno => {
                                   if(this.VideosMaisRecentes.Registros != null){
