@@ -1,5 +1,4 @@
-import { Http, URLSearchParams, Response } from '@angular/http';
-import { Injectable, NgZone } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { window } from '@angular/platform-browser/src/facade/browser';
 
 

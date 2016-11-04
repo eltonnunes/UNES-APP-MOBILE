@@ -23,7 +23,6 @@ export class LoginService {
 
       // Autenticar no Servidor
       public Autenticar (body: Object): Observable<Retorno> {
-        let bodyString = JSON.stringify(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
@@ -31,6 +30,17 @@ export class LoginService {
                          .map((res:Response) => res.json())
                          .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
       }
+
+
+      public SendError (body: string): Observable<Retorno> {
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+
+        return this.http.post(GlobalVariable.BASE_API_URL + 'util', body, options)
+                         .map((res:Response) => res.json())
+                         .catch((error:any) => Observable.throw(error.json().error || 'Server error'));
+      }
+
 
       // Valida se o CPF / CNPJ existe em nosso sistema.
       public getValidateCpfCnpj(CpfCnpj) : Observable<Retorno>{
@@ -87,7 +97,6 @@ export class LoginService {
 
       // Ligar para ServeLoja
       public Ligar (body: Object): Observable<Retorno> {
-        let bodyString = JSON.stringify(body);
         let headers = new Headers({ 'Content-Type': 'application/json' });
         let options = new RequestOptions({ headers: headers });
 
@@ -121,7 +130,6 @@ export class LoginService {
 
 
       public Validate(token){
-        let validTOken: Boolean = <Boolean>token;
         if(!token)
           this.Logout();
       }

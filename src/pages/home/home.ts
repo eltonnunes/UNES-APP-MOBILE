@@ -6,8 +6,6 @@ import { LoadingController } from 'ionic-angular';
 import { StatusBar } from 'ionic-native';
 
 import { HelloIonicPage } from '../hello-ionic/hello-ionic';
-import { ListPage } from '../list/list';
-import { ViewVideo } from '../view-video/view-video';
 import { TagVideo } from '../tag-video/tag-video';
 import { Login } from '../login/login';
 

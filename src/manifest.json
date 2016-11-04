@@ -1,5 +1,5 @@
 {
-  "name": "UNES",
+  "name": "UNES Universidade do Empreendedor",
   "short_name": "UNES",
   "start_url": "index.html",
   "display": "standalone",
@@ -8,6 +8,7 @@
     "sizes": "512x512",
     "type": "image/png"
   }],
+  "background_image": "resources/android/splash/drawable-port-mdpi-screen.png",
   "background_color": "#0c4727",
   "theme_color": "#0c4727"
 }

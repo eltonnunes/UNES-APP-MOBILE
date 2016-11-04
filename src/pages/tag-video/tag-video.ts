@@ -67,6 +67,10 @@ export class TagVideo {
     });
   }
 
+  goBack() {
+    this.navCtrl.pop();
+  }
+
   getTagsMenu(){
     this.apiUnes.ListaTagsMenu()
                       .subscribe(

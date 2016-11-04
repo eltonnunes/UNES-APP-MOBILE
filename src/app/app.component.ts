@@ -1,14 +1,10 @@
 import { Component, ViewChild } from '@angular/core';
 
-import { NavController, NavParams } from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
 import { Platform, MenuController, Nav } from 'ionic-angular';
 
 import { StatusBar } from 'ionic-native';
 
 import { HelloIonicPage } from '../pages/hello-ionic/hello-ionic';
-import { ListPage } from '../pages/list/list';
-import { ViewVideo } from '../pages/view-video/view-video';
 import { TagVideo } from '../pages/tag-video/tag-video';
 import { Login } from '../pages/login/login';
 import { Home } from '../pages/home/home';
@@ -46,8 +42,13 @@ export class MyApp {
     this.loginService.getValidateToken()
                                         .subscribe(
                                             retorno => {
-                                              this.nav.setRoot(Home, { dados: retorno });
-                                              //console.log(retorno);
+                                              console.log(retorno);
+                                              if( retorno.Token )
+                                              {
+                                                this.nav.setRoot(Home, { dados: retorno });
+                                              }else{
+                                                this.nav.setRoot(Login);
+                                              }
                                             },
                                             err => {
                                                 //console.log(err);

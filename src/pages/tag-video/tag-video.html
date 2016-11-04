@@ -1,12 +1,30 @@
-<ion-header style="margin-left: 10px;">
+<!--ion-header style="margin-left: 10px;">
   <ion-navbar style="height: 50px; background-image: url(assets/menu3.fw.png); background-size: 40px; background-repeat: no-repeat; background-position: bottom; padding-top: 20px; background-position-x: 0px; ">
     <button ion-button menuToggle>
-      <!--ion-icon name="information-circle" style="color: #0c4727;position: absolute; margin-left: -37px; font-size: 40px;"></ion-icon-->
     </button>
 
     <ion-title style="align-items: flex-end;"><img src="assets/logo.jpg" height="25px"></ion-title>
   </ion-navbar>
+</ion-header-->
+
+<ion-header style="margin-left: 10px;">
+  <ion-navbar style="height: 50px; background-image: url(assets/menu3.fw.png); background-size: 40px; background-repeat: no-repeat; background-position: bottom; padding-top: 20px; background-position-x: 0px; ">
+    <button (click)="goBack()" class="goBack" style="width: 100%">
+      <!--ion-icon name="information-circle" style="color: #0c4727;position: absolute; margin-left: -37px; font-size: 40px;"></ion-icon-->
+
+
+      <ion-grid style="margin-left: 26px;">
+        <ion-row>
+          <ion-col width-90><img src="assets/logo.jpg" height="25px" style=""></ion-col>
+          <ion-col width-10><ion-icon name="close" style="color: #f8f8f8"></ion-icon></ion-col>
+        </ion-row>
+      </ion-grid>
+
+    </button>
+  </ion-navbar>
 </ion-header>
+
+
 
 
 <ion-content padding class="home"  style="margin-left: 10px;">

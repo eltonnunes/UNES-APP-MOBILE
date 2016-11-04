@@ -8,7 +8,6 @@ import { Retorno } from '../../models/retorno';
 
 import { ViewVideo } from '../view-video/view-video';
 import { TagVideo } from '../tag-video/tag-video';
-import { Home } from '../home/home';
 
 
 @Component({

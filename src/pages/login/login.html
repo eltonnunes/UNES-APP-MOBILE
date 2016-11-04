@@ -1,12 +1,13 @@
-<ion-header>
+<!--ion-header>
   <ion-navbar style="height: 135px; background-color: #fff;">
     <ion-title><img src="assets/logoLogin.jpg" height="100px" style="vertical-align: bottom;"></ion-title>
   </ion-navbar>
-</ion-header>
+</ion-header-->
 
 
-<ion-content padding class="home">
+<ion-content padding class="home" style="overflow-x: none !important; overflow-y: none !important; text-align: center;">
 
+<img src="assets/logo-login1.jpg" height="120px" style="vertical-align: bottom;">
 
   <ion-card style="background-color: #fff;">
 
@@ -14,29 +15,30 @@
 
 
 
-  <ion-list>
+      <ion-list>
 
-    <ion-item style="margin: 8px;">
-      <ion-label floating>Usuário</ion-label>
-      <ion-input [(ngModel)]="username" type="text" value=""></ion-input>
-    </ion-item>
+        <ion-item style="margin: 8px;">
+          <ion-label floating>Usuário</ion-label>
+          <ion-input [(ngModel)]="username" type="text" value=""></ion-input>
+        </ion-item>
 
-    <ion-item style="margin: 8px;">
-      <ion-label floating>Password</ion-label>
-      <ion-input [(ngModel)]="password" type="number" style="-webkit-text-security:disc" value=""></ion-input>
-    </ion-item>
+        <ion-item style="margin: 8px;">
+          <ion-label floating>Senha</ion-label>
+          <ion-input [(ngModel)]="password" type="number" style="-webkit-text-security:disc" value=""></ion-input>
+        </ion-item>
 
-  </ion-list>
+      </ion-list>
 
-  <div padding>
-    <button style="background-color: #0c4727 !important;" class="disable-hover button button-ios button-default button-default-ios button-block button-block-ios"
-    (click)="Autenticar()" (press)="Autenticar()">Logar</button>
-  </div>
+      <div padding>
+        <button style="background-color: #0c4727 !important;" class="disable-hover button button-ios button-default button-default-ios button-block button-block-ios"
+        (click)="Autenticar()" (press)="Autenticar()">Logar</button>
+      </div>
 
+      <p>{{msg}}</p>
 
-</ion-card-content>
+    </ion-card-content>
 
-</ion-card>
+  </ion-card>
 
   <div class="large-10 large-centered medium-10 medium-centered column" style="font-size: 1.0em; text-align: center !important; margin-bottom: 1.5rem; margin-top: 5.5rem;">
         <strong>Versão 1.0.0 </strong><br /><br />

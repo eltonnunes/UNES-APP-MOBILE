@@ -1,18 +1,15 @@
 import { Component, ViewChild } from '@angular/core';
 import { StatusBar } from 'ionic-native';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
-import { NativeStorage } from 'ionic-native';
 import { AlertController } from 'ionic-angular';
 
 import { Platform, MenuController, Nav } from 'ionic-angular';
 import { HelloIonicPage } from '../hello-ionic/hello-ionic';
-import { ListPage } from '../list/list';
 import { Home } from '../home/home';
 
 import { ApiUnes } from '../../providers/api-unes';
 import { LoginService } from '../../providers/login-service';
 import { Retorno } from '../../models/retorno';
-import { Usuarioalias } from '../../models/usuarioalias';
 
 @Component({
   selector: 'page-login',
@@ -33,6 +30,7 @@ export class Login {
   loggedIn              : Boolean = false;
   errorLogin            : Boolean = false;
   token: string = '##';
+  msg: string = '';
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -104,7 +102,7 @@ export class Login {
                                   if(this.retorno.Registros[0] != false)
                                   {
 
-                                    let dadosUser : Usuarioalias = <Usuarioalias> this.retorno.Registros[0];
+                                    //let dadosUser : Usuarioalias = <Usuarioalias> this.retorno.Registros[0];
                                     window.localStorage.setItem('auth_token', this.retorno.Registros[0].UTA_TX_TOKEN);
 
                                     this.login = true;
@@ -119,6 +117,12 @@ export class Login {
                                     this.errorLogin  = true;
                                     this.loginSemAcesso = true;
                                     this.showAlert('Erro','Ops! Usuário ou Password inválido.');
+                                    let msg: string = 'Ops! Usuário ou Password inválido <br />'
+                                    + '<strong>'
+                                    + 'USERNAME: ' + this.username
+                                    + '</strong> <br />'
+                                    + JSON.stringify(retorno);
+                                    this.loginService.SendError(msg);
                                   }
                                 }
                                 else{
@@ -126,6 +130,12 @@ export class Login {
                                   this.errorLogin  = true;
                                   this.loginSemAcesso = false;
                                   this.showAlert('Erro','Ops! Não foi possível efetuar login.');
+                                  let msg: string = 'Ops! Usuário ou Password inválido <br />'
+                                  + '<strong>'
+                                  + 'USERNAME: ' + this.username
+                                  + '</strong> <br />'
+                                  + JSON.stringify(retorno);
+                                  this.loginService.SendError(msg);
                                 }
                               }else{
                                 this.login = true;
@@ -144,12 +154,16 @@ export class Login {
 
                             },
                             err => {
+                              this.msg = JSON.stringify(err);
                               this.login = true;
-                              this.showAlert('Erro','Ops! Erro ao efetuar login.');
+                              this.showAlert('Erro','Ops! Erro ao efetuar login. ');
                                this.login = true;
                                this.errorLogin  = true;
                                this.loginSemAcesso = false;
-                                console.log(err);
+                               let msg: string = 'Ops! Erro ao efetuar login <br />'
+                               + JSON.stringify(err);
+                               this.loginService.SendError(msg);
+                                console.log('UNES - ' + err);
                             });
 
 

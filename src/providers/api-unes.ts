@@ -7,7 +7,6 @@ import 'rxjs/add/operator/catch';
 
 import '../globals';
 
-import { Retorno }          from '../models/retorno';
 import { GlobalVariable }   from '../globals'
 
 @Injectable()

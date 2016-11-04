@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import {Http} from '@angular/http';
 import 'rxjs/add/operator/map';
-import { DomSanitizer, SafeResourceUrl, SafeUrl } from '@angular/platform-browser';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { NavController, NavParams } from 'ionic-angular';
 
-import { HelloIonicPage } from '../hello-ionic/hello-ionic';
 import { YoutubeService } from '../../providers/youtube-service';
 
 import { LoadingController } from 'ionic-angular';
