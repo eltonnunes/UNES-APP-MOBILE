@@ -51,6 +51,7 @@ export class ViewVideo {
   ionViewDidLoad() {
     console.log('Hello ViewVideo Page');
     this.launchYTPlayer(this.selectedItem.UNV_TX_HASH, this.selectedItem.UNV_TX_TITULO);
+    
   }
 
   goBack() {

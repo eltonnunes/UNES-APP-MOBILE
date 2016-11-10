@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
 import { LoadingController } from 'ionic-angular';
+import { Response } from '@angular/http';
 
 import { ApiUnes } from '../../providers/api-unes';
 import { LoginService } from '../../providers/login-service';
@@ -64,7 +65,12 @@ export class HelloIonicPage {
   }
 
   playVideo($event, card){
-    console.log(card.UNV_ID_VIDEOS);
+
+    //console.log(card.UNV_ID_VIDEOS);
+    let returnOperation: Response;
+    this.apiUnes.AtualizaViewVideo({ VIDEOS : { UNV_ID_VIDEOS: card.UNV_ID_VIDEOS }}).subscribe(
+        retorno => { returnOperation = retorno; /*console.log(retorno);*/ },
+        err => { console.log(err) });
     this.navCtrl.push(ViewVideo, { item: card });
   }
 

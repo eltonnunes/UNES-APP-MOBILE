@@ -19,7 +19,7 @@
 
         <ion-item style="margin: 8px;">
           <ion-label floating>Usuário</ion-label>
-          <ion-input [(ngModel)]="username" type="text" value=""></ion-input>
+          <ion-input [(ngModel)]="username" type="text"  value=""></ion-input>
         </ion-item>
 
         <ion-item style="margin: 8px;">
@@ -31,10 +31,8 @@
 
       <div padding>
         <button style="background-color: #0c4727 !important;" class="disable-hover button button-ios button-default button-default-ios button-block button-block-ios"
-        (click)="Autenticar()" (press)="Autenticar()">Logar</button>
+        (click)="Autenticar()" (press)="Autenticar()" [disabled]="!login">Logar</button>
       </div>
-
-      <p>{{msg}}</p>
 
     </ion-card-content>
 
